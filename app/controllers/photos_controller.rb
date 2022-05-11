@@ -51,18 +51,16 @@ class PhotosController < ApplicationController
   end
 
   def comment
-    the_id = params.fetch("input_photo_id")
-    matching_comments = Comment.where({ :photo_id => the_id})
-    the_comment = matching_comments.at(0)
     a_new_comment = Comment.new
-    a_new_comment
+    a_new_comment.photo_id = params.fetch("input_photo_id")
+    a_new_comment.author_id = params.fetch("input_author_id")
+    a_new_comment.body = params.fetch("input_body")
+    a_new_comment.save
 
 
     #the_author_id = params.fecth("input_author_id")
     
-
-
-    redirect_to("/photos/" + )
+    redirect_to("/photos/" + a_new_comment.photo_id.to_s)
 
   end  
 end
